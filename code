@@ -1,0 +1,152 @@
+
+# SMART IRRIGATION - WATER REQUIREMENT PREDICTION
+# Machine Learning Algorithm: Linear Regression
+
+# 1. Import Libraries
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+
+# 2. Upload Dataset
+
+from google.colab import files
+
+uploaded = files.upload()
+
+df = pd.read_csv('smart_irrigation_synthetic_dataset.csv')
+
+# 3. Display Dataset
+
+print("FIRST FIVE ROWS:")
+print(df.head())
+
+print("\nDATASET SHAPE:")
+print(df.shape)
+
+print("\nDATASET INFORMATION:")
+print(df.info())
+
+print("\nSTATISTICAL SUMMARY:")
+print(df.describe())
+
+print("\nMISSING VALUES:")
+print(df.isnull().sum())
+
+# 4. Data Visualization
+
+plt.figure(figsize=(8,5))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title("Correlation Heatmap")
+plt.show()
+
+# 5. Select Input and Output Variables
+
+X = df[['Temperature',
+        'Humidity',
+        'Soil_Moisture',
+        'Rainfall']]
+
+y = df['Water_Required']
+
+# 6. Split Dataset into Training and Testing
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+print("\nTraining Data:", X_train.shape)
+print("Testing Data:", X_test.shape)
+
+# 7. Create Linear Regression Model
+
+model = LinearRegression()
+
+# 8. Train the Model
+
+model.fit(X_train, y_train)
+
+print("\nModel Training Completed Successfully!")
+
+# 9. Make Predictions
+
+y_pred = model.predict(X_test)
+
+print("\nACTUAL VALUES:")
+print(y_test.head(10).values)
+
+print("\nPREDICTED VALUES:")
+print(y_pred[:10])
+
+# 10. Model Evaluation
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
+
+print("\nMODEL EVALUATION:")
+print("MAE:", mae)
+print("MSE:", mse)
+print("RMSE:", rmse)
+print("R2 Score:", r2)
+
+# 11. Actual vs Predicted Graph
+
+plt.figure(figsize=(8,5))
+plt.scatter(y_test, y_pred)
+
+plt.xlabel("Actual Water Required")
+plt.ylabel("Predicted Water Required")
+plt.title("Actual vs Predicted Values")
+
+plt.show()
+
+# 12. Regression Line (Predicted vs Actual)
+
+plt.figure(figsize=(8,5))
+plt.plot(y_test.values, label='Actual Values')
+plt.plot(y_pred, label='Predicted Values')
+
+plt.xlabel("Test Samples")
+plt.ylabel("Water Required")
+plt.title("Actual and Predicted Water Requirement")
+plt.legend()
+plt.show()
+
+# 13. Predict Water Requirement for New Input
+
+new_data = pd.DataFrame({
+    'Temperature': [32],
+    'Humidity': [60],
+    'Soil_Moisture': [25],
+    'Rainfall': [5]
+})
+
+prediction = model.predict(new_data)
+
+print("\nNEW WATER REQUIREMENT PREDICTION:")
+print("Temperature: 32°C")
+print("Humidity: 60%")
+print("Soil Moisture: 25%")
+print("Rainfall: 5 mm")
+
+print("Predicted Water Required:",
+      round(prediction[0], 2), "litres")
+
+# 14. Display Model Coefficients
+
+print("\nMODEL COEFFICIENTS:")
+for feature, coefficient in zip(X.columns, model.coef_):
+    print(feature, ":", coefficient)
+
+print("\nINTERCEPT:", model.intercept_)
+
+print("\nPROJECT COMPLETED SUCCESSFULLY!")
