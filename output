@@ -1,0 +1,83 @@
+smart_irrigation_synthetic_dataset.csv
+smart_irrigation_synthetic_dataset.csv(text/csv) - 12790 bytes, last modified: 25/11/2026 - 100% done
+Saving smart_irrigation_synthetic_dataset.csv to smart_irrigation_synthetic_dataset.csv
+FIRST FIVE ROWS:
+   Temperature  Humidity  Soil_Moisture  Rainfall  Water_Required
+0         36.6      72.9           14.3      20.2           22.15
+1         28.5      82.6           42.1      28.8           14.00
+2         38.6      84.9           19.0      11.1           23.66
+3         34.7      57.7           20.7      12.8           24.37
+4         20.3      58.8           54.3      24.4            8.09
+
+DATASET SHAPE:
+(500, 5)
+
+DATASET INFORMATION:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 500 entries, 0 to 499
+Data columns (total 5 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   Temperature     500 non-null    float64
+ 1   Humidity        500 non-null    float64
+ 2   Soil_Moisture   500 non-null    float64
+ 3   Rainfall        500 non-null    float64
+ 4   Water_Required  500 non-null    float64
+dtypes: float64(5)
+memory usage: 19.7 KB
+None
+
+STATISTICAL SUMMARY:
+       Temperature    Humidity  Soil_Moisture    Rainfall  Water_Required
+count   500.000000  500.000000     500.000000  500.000000      500.000000
+mean     29.895600   57.413200      45.318200   15.375600       17.490040
+std       6.882156   19.279452      20.405697    8.624103        5.935842
+min      18.100000   25.100000      10.000000    0.000000        1.440000
+25%      23.675000   40.800000      27.250000    7.575000       13.415000
+50%      30.000000   57.100000      44.500000   15.000000       17.425000
+75%      35.925000   74.625000      63.175000   22.925000       21.740000
+max      42.000000   89.900000      80.000000   30.000000       34.820000
+
+MISSING VALUES:
+Temperature       0
+Humidity          0
+Soil_Moisture     0
+Rainfall          0
+Water_Required    0
+dtype: int64
+
+
+Training Data: (400, 4)
+Testing Data: (100, 4)
+
+Model Training Completed Successfully!
+
+ACTUAL VALUES:
+[10.01  5.78  5.53 27.23 23.9  10.31 14.75 11.6  19.84  2.19]
+
+PREDICTED VALUES:
+[11.04076723  5.80406579  4.12608472 26.46572987 26.12347172  9.06352606
+ 14.07699159 13.59314041 19.97391064  5.4699077 ]
+
+MODEL EVALUATION:
+MAE: 1.6062841225398317
+MSE: 4.152675435691268
+RMSE: 2.03781143281003
+R2 Score: 0.9026073267933855
+
+
+
+NEW WATER REQUIREMENT PREDICTION:
+Temperature: 32°C
+Humidity: 60%
+Soil Moisture: 25%
+Rainfall: 5 mm
+Predicted Water Required: 24.92 litres
+
+MODEL COEFFICIENTS:
+Temperature : 0.4192731015478804
+Humidity : -0.04455134716237302
+Soil_Moisture : -0.19145537749297695
+Rainfall : -0.26139251192942925
+
+INTERCEPT: 20.26640467792903
