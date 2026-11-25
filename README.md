@@ -109,6 +109,4 @@ The project is an educational prototype and requires validation using real agric
 
 Developed as an academic Machine Learning project in Artificial Intelligence and Data Science.
 
-## 13. License
 
-This project is intended for educational purposes.
